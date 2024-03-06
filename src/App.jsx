@@ -1,6 +1,10 @@
+import Layout from "./layouts/Layout";
+
 function App() {
   return (
-    <div>app</div>
+    <div>
+      <Layout></Layout>
+    </div>
   );
 }
 
