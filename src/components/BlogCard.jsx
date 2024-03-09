@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Avatar,
   Card,
@@ -36,13 +37,15 @@ function BlogCard({
       </CardContent>
       <Divider variant="middle" sx={{ margin: "10px" }} />
       <CardActions>
-        <Button
-          variant="outlined"
-          size="small"
-          sx={{ width: "100%", borderRadius: 3 }}
-        >
-          مشاهده مقاله
-        </Button>
+        <Link to={`/blogs/${slug}`} style={{width : "100%"}}>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{ width: "100%", borderRadius: 3 }}
+          >
+            مشاهده مقاله
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
