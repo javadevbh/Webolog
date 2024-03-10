@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_BLOGS_INFO = gql`
-  query MyQuery {
-    posts {
+  query MyQuery($quantity: Int!) {
+    posts(first: $quantity) {
       author {
         avatar {
           url
