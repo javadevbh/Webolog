@@ -22,7 +22,7 @@ function Blogs() {
           <BlogCard {...post} />
         </Grid>
       ))}
-      <Grid xs={12} my={4} padding={0}>
+      <Grid item xs={12} my={4} padding={0}>
         <Link to="/blogs">
           <Button variant="outlined" size="large" sx={{ width: "100%" }}>
             مشاهده همه

@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import BlogsPage from "./pages/BlogsPage";
 import AuthorPage from "./pages/AuthorPage";
 import BlogPage from "./pages/BlogPage";
+import AuthorsPage from "./pages/AuthorsPage";
 import PageNotFound from "./pages/404";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="blogs" element={<BlogsPage />} />
           <Route path="blogs/:slug" element={<BlogPage />} />
+          <Route path="authors" element={<AuthorsPage />} />
           <Route path="authors/:slug" element={<AuthorPage />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>

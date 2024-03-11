@@ -7,7 +7,9 @@ import { useQuery } from "@apollo/client";
 import { GET_AUTHORS_INFO } from "../graphql/queries";
 
 function Authors() {
-  const { loading, data, error } = useQuery(GET_AUTHORS_INFO);
+  const { loading, data, error } = useQuery(GET_AUTHORS_INFO , {
+    variables : {quantity : 4}
+  });
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>{error.message}</h4>;
   return (

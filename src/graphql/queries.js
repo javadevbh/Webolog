@@ -20,11 +20,15 @@ const GET_BLOGS_INFO = gql`
 `;
 
 const GET_AUTHORS_INFO = gql`
-  query MyQuery {
-    authors {
+  query MyQuery($quantity: Int!) {
+    authors(first: $quantity) {
       id
       name
       slug
+      field
+      description {
+        markdown
+      }
       avatar {
         url
       }
