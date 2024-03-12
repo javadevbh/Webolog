@@ -9,11 +9,13 @@ import { GET_BLOGS_INFO } from "../graphql/queries";
 //Components
 import BlogCard from "../components/BlogCard";
 
+//Skeleton loader
+import BlogCardSkeleton from "../components/loader/BlogCardSkeleton";
+
 function BlogsPage() {
   const { loading, data, error } = useQuery(GET_BLOGS_INFO, {
     variables: { quantity: 50 },
   });
-  if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>{error.message}</h4>;
   return (
     <Container maxWidth="lg">
@@ -37,11 +39,15 @@ function BlogsPage() {
         </Typography>
       </div>
       <Grid container my={4} spacing={2}>
-        {data.posts.map((post) => (
-          <Grid item key={post.id} xs={12} sm={6} md={3}>
-            <BlogCard {...post} />
-          </Grid>
-        ))}
+        {loading ? (
+          <BlogCardSkeleton quantity={10} md={3} />
+        ) : (
+          data.posts.map((post) => (
+            <Grid item key={post.id} xs={12} sm={6} md={3}>
+              <BlogCard {...post} />
+            </Grid>
+          ))
+        )}
       </Grid>
     </Container>
   );

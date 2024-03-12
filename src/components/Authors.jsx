@@ -6,41 +6,48 @@ import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS_INFO } from "../graphql/queries";
 
+//Skeleton loader
+import AuthorsSkeleton from "./loader/AuthorsSkeleton";
+
 function Authors() {
-  const { loading, data, error } = useQuery(GET_AUTHORS_INFO , {
-    variables : {quantity : 4}
+  const { loading, data, error } = useQuery(GET_AUTHORS_INFO, {
+    variables: { quantity: 4 },
   });
-  if (loading) return <h4>Loading...</h4>;
+
   if (error) return <h4>{error.message}</h4>;
   return (
     <Grid
       container
       sx={{ boxShadow: "rgba(0 , 0 , 0 , 0.1) 0 4px 12px", borderRadius: 4 }}
     >
-      {data.authors.map((author, index) => (
-        <React.Fragment key={author.id}>
-          <Grid item xs={12} padding={2}>
-            <Link
-              to={`/authors/${author.slug}`}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-              }}
-            >
-              <Avatar src={author.avatar.url} sx={{ marginLeft: 1 }} />
-              <Typography component="p" variant="p" color="text.secondary">
-                {author.name}
-              </Typography>
-            </Link>
-          </Grid>
-          {index !== data.authors.length - 1 && (
-            <Grid item xs={12}>
-              <Divider variant="middle" />
+      {loading ? (
+        <AuthorsSkeleton quantity={4} />
+      ) : (
+        data.authors.map((author, index) => (
+          <React.Fragment key={author.id}>
+            <Grid item xs={12} padding={2}>
+              <Link
+                to={`/authors/${author.slug}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                }}
+              >
+                <Avatar src={author.avatar.url} sx={{ marginLeft: 1 }} />
+                <Typography component="p" variant="p" color="text.secondary">
+                  {author.name}
+                </Typography>
+              </Link>
             </Grid>
-          )}
-        </React.Fragment>
-      ))}
+            {index !== data.authors.length - 1 && (
+              <Grid item xs={12}>
+                <Divider variant="middle" />
+              </Grid>
+            )}
+          </React.Fragment>
+        ))
+      )}
     </Grid>
   );
 }
