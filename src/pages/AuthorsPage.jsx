@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS_INFO } from "../graphql/queries";
-import { Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 //Components
@@ -14,7 +14,7 @@ function AuthorsPage() {
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>{error.message}</h4>;
   return (
-    <>
+    <Container maxWidth="lg">
       <div
         style={{
           display: "flex",
@@ -34,14 +34,14 @@ function AuthorsPage() {
           نویسنده ها
         </Typography>
       </div>
-      <Grid container gap={4} my={4} justifyContent="center">
+      <Grid container my={4} spacing={2}>
         {data.authors.map((author) => (
-          <Grid item key={author.id} xs={12} sm={6} md={3}>
+          <Grid item key={author.id} xs={12} sm={6} md={4}>
             <AuthorCard {...author} />
           </Grid>
         ))}
       </Grid>
-    </>
+    </Container>
   );
 }
 

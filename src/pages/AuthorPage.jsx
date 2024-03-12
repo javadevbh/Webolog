@@ -43,16 +43,20 @@ function AuthorPage() {
         <ArrowBackIosIcon fontSize="12px" />
         <Link
           to="/authors"
-          style={{ textDecoration: "none", color: "rgba(0 , 0 , 0 , 0.7)" , marginRight : "8px" }}
+          style={{
+            textDecoration: "none",
+            color: "rgba(0 , 0 , 0 , 0.7)",
+            marginRight: "8px",
+          }}
         >
           نویسنده ها
         </Link>
         <ArrowBackIosIcon fontSize="12px" />
         <Typography component="p" variant="p" mr={1} color="text.secondary">
-           {name}
+          {name}
         </Typography>
       </div>
-      <Grid container mt={10} gap={4}>
+      <Grid container my={4} gap={4}>
         <Grid
           item
           xs={12}
