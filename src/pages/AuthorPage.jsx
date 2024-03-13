@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHOR_INFO } from "../graphql/queries";
-import sanitizeHTML from "sanitize-html";
+import sanitizeHtml from "sanitize-html";
 import { Avatar, Container, Grid, Skeleton, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
@@ -83,7 +83,7 @@ function AuthorPage() {
               <Typography component="span">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: sanitizeHTML(data.author.description.html),
+                    __html: sanitizeHtml(data.author.description.html),
                   }}
                 ></div>
               </Typography>

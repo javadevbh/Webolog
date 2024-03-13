@@ -1,8 +1,8 @@
-import { Container, Grid, Skeleton } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 
 function AuthorPageSkeleton() {
   return (
-    <Container maxWidth="lg">
+    <>
       <Grid
         item
         xs={12}
@@ -62,7 +62,7 @@ function AuthorPageSkeleton() {
           style={{ marginBottom: 6, marginTop: 16 }}
         />
       </Grid>
-    </Container>
+    </>
   );
 }
 
