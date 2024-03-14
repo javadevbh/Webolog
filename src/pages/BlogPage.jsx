@@ -13,6 +13,9 @@ import {
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 
+//Components
+import CommentForm from "../components/CommentForm";
+
 //Skeleton loader
 import BlogPageSkeleton from "../components/loader/BlogPageSkeleton";
 
@@ -120,6 +123,9 @@ function BlogPage() {
             </Grid>
           </>
         )}
+        <Grid item xs={12}>
+          <CommentForm slug={slug} />
+        </Grid>
       </Grid>
     </Container>
   );
