@@ -15,6 +15,7 @@ import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 
 //Components
 import CommentForm from "../components/CommentForm";
+import Comments from "../components/Comments";
 
 //Skeleton loader
 import BlogPageSkeleton from "../components/loader/BlogPageSkeleton";
@@ -125,6 +126,9 @@ function BlogPage() {
         )}
         <Grid item xs={12}>
           <CommentForm slug={slug} />
+        </Grid>
+        <Grid item xs={12}>
+          <Comments slug={slug} />
         </Grid>
       </Grid>
     </Container>
