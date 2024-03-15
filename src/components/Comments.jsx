@@ -2,6 +2,9 @@ import { useQuery } from "@apollo/client";
 import { GET_BLOG_COMMENTS } from "../graphql/queries";
 import { Typography, Grid, Box, Avatar } from "@mui/material";
 
+//Helpers
+import { convertDate } from "../helpers/helper";
+
 function Comments({ slug }) {
   const { loading, data, error } = useQuery(GET_BLOG_COMMENTS, {
     variables: { slug },
@@ -35,8 +38,17 @@ function Comments({ slug }) {
         >
           <Box component="div" display="flex" alignItems="center" mb={2}>
             <Avatar>{comment.name[0]}</Avatar>
-            <Typography component="span" variant="p" mr={1}>
+            <Typography component="span" variant="p" mr={1} fontWeight={700}>
               {comment.name}
+            </Typography>
+            <Typography
+              component="span"
+              variant="p"
+              mr={2}
+              color="text.secondary"
+              fontSize={15}
+            >
+              {convertDate(comment.datePublished)}
             </Typography>
           </Box>
           <Typography component="p" variant="p">

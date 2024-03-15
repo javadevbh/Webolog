@@ -12,6 +12,7 @@ const GET_BLOGS_INFO = gql`
       id
       title
       slug
+      datePublished
       coverPhoto {
         url
       }
@@ -47,6 +48,7 @@ const GET_BLOG_COMMENTS = gql`
         name
         id
         text
+        datePublished
       }
     }
   }

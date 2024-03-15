@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { convertDate } from "../helpers/helper";
 import {
   Avatar,
   Card,
@@ -11,7 +12,7 @@ import {
   Button,
 } from "@mui/material";
 
-function BlogCard({ title, slug, coverPhoto: { url }, author }) {
+function BlogCard({ title, slug, datePublished, coverPhoto: { url }, author }) {
   return (
     <Card
       sx={{ boxShadow: "rgba(0 , 0 , 0 , 0.1) 0 4px 12px", borderRadius: 4 }}
@@ -20,8 +21,13 @@ function BlogCard({ title, slug, coverPhoto: { url }, author }) {
         <CardHeader
           avatar={<Avatar src={author.avatar.url} sx={{ marginLeft: 1 }} />}
           title={
-            <Typography component="p" variant="p" color="text.secondary">
+            <Typography component="p" variant="p" color="text.primary">
               {author.name}
+            </Typography>
+          }
+          subheader={
+            <Typography component="p" variant="p" color="text.secondary">
+              {convertDate(datePublished)}
             </Typography>
           }
         />

@@ -9,6 +9,7 @@ import { Comment } from "react-loader-spinner";
 //Helpers
 import notify from "../helpers/toastify";
 import validate from "../helpers/validate";
+import { formatDate } from "../helpers/helper";
 
 function CommentForm({ slug }) {
   const [form, setForm] = useState({
@@ -17,9 +18,10 @@ function CommentForm({ slug }) {
     text: "",
   });
   const { name, email, text } = form;
+  const datePublished = formatDate(new Date());
 
   const [sendComment, { loading, data, error }] = useMutation(SEND_COMMENT, {
-    variables: { name, email, text, slug },
+    variables: { name, email, text, slug, datePublished },
   });
   const [errors, setErrors] = useState({});
 
