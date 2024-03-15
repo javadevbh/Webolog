@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Container, Grid, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
@@ -13,6 +14,7 @@ import BlogCard from "../components/BlogCard";
 import BlogCardSkeleton from "../components/loader/BlogCardSkeleton";
 
 function BlogsPage() {
+  useScrollToTop();
   const { loading, data, error } = useQuery(GET_BLOGS_INFO, {
     variables: { quantity: 50 },
   });

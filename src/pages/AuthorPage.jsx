@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHOR_INFO } from "../graphql/queries";
 import sanitizeHtml from "sanitize-html";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Avatar, Container, Grid, Skeleton, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
@@ -12,6 +13,7 @@ import BlogCard from "../components/BlogCard";
 import AuthorPageSkeleton from "../components/loader/AuthorPageSkeleton";
 
 function AuthorPage() {
+  useScrollToTop();
   const { slug } = useParams();
   const { loading, data, error } = useQuery(GET_AUTHOR_INFO, {
     variables: { slug },

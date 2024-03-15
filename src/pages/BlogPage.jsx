@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_BLOG_INFO } from "../graphql/queries";
 import sanitizeHtml from "sanitize-html";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import {
   Container,
   Typography,
@@ -21,6 +22,7 @@ import Comments from "../components/Comments";
 import BlogPageSkeleton from "../components/loader/BlogPageSkeleton";
 
 function BlogPage() {
+  useScrollToTop();
   const { slug } = useParams();
   const navigate = useNavigate();
   const { loading, data, error } = useQuery(GET_BLOG_INFO, {

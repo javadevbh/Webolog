@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Container, Typography, Grid } from "@mui/material";
 
 //Components
@@ -6,6 +7,7 @@ import Blogs from "../components/Blogs";
 import Authors from "../components/Authors";
 
 function HomePage() {
+  useScrollToTop();
   return (
     <Container>
       <Grid container spacing={3} mt={4} padding={3}>
@@ -15,14 +17,19 @@ function HomePage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom : "24px"
+              marginBottom: "24px",
             }}
           >
             <Typography component="h3" variant="h5" fontWeight={700}>
               نویسنده ها
             </Typography>
-            <Link to="authors" style={{textDecoration : "none"}}>
-              <Typography component="p" variant="p" color="text.secondary" fontWeight={500}>
+            <Link to="authors" style={{ textDecoration: "none" }}>
+              <Typography
+                component="p"
+                variant="p"
+                color="text.secondary"
+                fontWeight={500}
+              >
                 مشاهده همه
               </Typography>
             </Link>

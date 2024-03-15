@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS_INFO } from "../graphql/queries";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Container, Grid, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
@@ -11,6 +12,7 @@ import AuthorCard from "../components/AuthorCard";
 import AuthorsPageSkeleton from "../components/loader/AuthorsPageSkeleton";
 
 function AuthorsPage() {
+  useScrollToTop();
   const { loading, data, error } = useQuery(GET_AUTHORS_INFO, {
     variables: { quantity: 50 },
   });
