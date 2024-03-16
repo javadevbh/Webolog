@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_BLOG_INFO } from "../graphql/queries";
+import { LIKE_BLOG } from "../graphql/mutations";
 import sanitizeHtml from "sanitize-html";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import {
@@ -10,9 +11,12 @@ import {
   Avatar,
   Box,
   Skeleton,
+  Button,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { TailSpin } from "react-loader-spinner";
 
 //Components
 import CommentForm from "../components/CommentForm";
@@ -28,6 +32,15 @@ function BlogPage() {
   const { loading, data, error } = useQuery(GET_BLOG_INFO, {
     variables: { slug },
   });
+
+  const [likeBlog, { loading: likeLoading, data: likeData, error: likeError }] =
+    useMutation(LIKE_BLOG, {
+      variables: { slug, likesCount: 1 },
+    });
+
+  const likeBlogHandler = () => {
+    likeBlog();
+  };
 
   if (error) return <p>{error}</p>;
 
@@ -126,6 +139,28 @@ function BlogPage() {
             </Grid>
           </>
         )}
+        <Grid item xs={12}>
+          <Box component="div" display="flex" alignItems="center">
+            <Typography component="p" variant="p">
+              مقاله رو دوست داشتی؟
+            </Typography>
+            <Button onClick={likeBlogHandler}>
+              <FavoriteIcon />
+              {likeLoading ? (
+                <TailSpin
+                  width="20"
+                  height="20"
+                  color="#1976d2"
+                  wrapperStyle={{ marginRight: "10px" }}
+                />
+              ) : (
+                <Typography component="span" variant="span" mr="4px">
+                  {!likeData ? "لایک " : "لایک شد"}
+                </Typography>
+              )}
+            </Button>
+          </Box>
+        </Grid>
         <Grid item xs={12}>
           <CommentForm slug={slug} />
         </Grid>

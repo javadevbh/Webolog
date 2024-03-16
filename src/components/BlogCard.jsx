@@ -10,9 +10,20 @@ import {
   Divider,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-function BlogCard({ title, slug, datePublished, coverPhoto: { url }, author }) {
+function BlogCard({
+  title,
+  slug,
+  datePublished,
+  coverPhoto: { url },
+  author,
+  comments,
+  likes,
+}) {
   return (
     <Card
       sx={{ boxShadow: "rgba(0 , 0 , 0 , 0.1) 0 4px 12px", borderRadius: 4 }}
@@ -33,10 +44,47 @@ function BlogCard({ title, slug, datePublished, coverPhoto: { url }, author }) {
         />
       )}
       <CardMedia component="img" height={194} image={url} alt={slug} />
-      <CardContent>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "16px 16px 5px 16px",
+          gap: 2,
+        }}
+      >
         <Typography component="h3" variant="h6" fontWeight={600}>
           {title}
         </Typography>
+        <Box component="div" display="flex" alignItems="center" gap={1}>
+          <Box component="div" display="flex" alignItems="center" gap="2px">
+            <ModeCommentOutlinedIcon color="disabled" fontSize="12px" />
+            <Typography
+              component="p"
+              variant="span"
+              fontSize="14px"
+              color="text.secondary"
+              mt="1px"
+            >
+              {comments.length}
+            </Typography>
+          </Box>
+          <Box component="div" display="flex" alignItems="center" gap="2px">
+            <FavoriteIcon
+              color="disabled"
+              fontSize="12px"
+              sx={{ marginBottom: "4px" }}
+            />
+            <Typography
+              component="p"
+              variant="span"
+              fontSize="14px"
+              color="text.secondary"
+            >
+              {likes.length}
+            </Typography>
+          </Box>
+        </Box>
       </CardContent>
       <Divider variant="middle" sx={{ margin: "10px" }} />
       <CardActions>

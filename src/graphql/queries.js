@@ -16,6 +16,12 @@ const GET_BLOGS_INFO = gql`
       coverPhoto {
         url
       }
+      comments {
+        name
+      }
+      likes {
+        likesCount
+      }
     }
   }
 `;
@@ -88,6 +94,12 @@ const GET_AUTHOR_INFO = gql`
         slug
         coverPhoto {
           url
+        }
+        comments {
+          name
+        }
+        likes {
+          likesCount
         }
       }
     }

@@ -22,4 +22,14 @@ const SEND_COMMENT = gql`
   }
 `;
 
-export { SEND_COMMENT };
+const LIKE_BLOG = gql`
+  mutation MyMutation($slug: String!, $likesCount: Int!) {
+    createLike(
+      data: { post: { connect: { slug: $slug } }, likesCount: $likesCount }
+    ) {
+      id
+    }
+  }
+`;
+
+export { SEND_COMMENT, LIKE_BLOG };
