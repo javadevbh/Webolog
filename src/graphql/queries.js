@@ -29,6 +29,8 @@ const GET_BLOGS_INFO = gql`
 const GET_BLOG_INFO = gql`
   query MyQuery($slug: String!) {
     post(where: { slug: $slug }) {
+      id
+      slug
       author {
         avatar {
           url

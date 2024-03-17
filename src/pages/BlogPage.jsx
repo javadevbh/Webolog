@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
+import { useDispatch } from "react-redux";
 import { GET_BLOG_INFO } from "../graphql/queries";
 import { LIKE_BLOG } from "../graphql/mutations";
 import sanitizeHtml from "sanitize-html";
@@ -12,11 +14,18 @@ import {
   Box,
   Skeleton,
   Button,
+  IconButton,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import BookmarkAddRoundedIcon from "@mui/icons-material/BookmarkAddRounded";
 import { TailSpin } from "react-loader-spinner";
+
+//Redux actions
+import { addItem, removeItem } from "../features//bookmarks/bookmarksSlice";
 
 //Components
 import CommentForm from "../components/CommentForm";
@@ -29,6 +38,8 @@ function BlogPage() {
   useScrollToTop();
   const { slug } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isBookmark, setIsBookmark] = useState(false);
   const { loading, data, error } = useQuery(GET_BLOG_INFO, {
     variables: { slug },
   });
@@ -103,10 +114,12 @@ function BlogPage() {
               >
                 {data.post.title}
               </Typography>
-              <ArrowBackRoundedIcon
+              <IconButton
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate(-1)}
-              />
+              >
+                <ArrowBackRoundedIcon />
+              </IconButton>
             </Grid>
             <Grid item xs={12}>
               <img
@@ -139,13 +152,17 @@ function BlogPage() {
             </Grid>
           </>
         )}
-        <Grid item xs={12}>
+        <Grid item xs={12} display="flex" alignItems="center" gap={2}>
           <Box component="div" display="flex" alignItems="center">
             <Typography component="p" variant="p">
               مقاله رو دوست داشتی؟
             </Typography>
             <Button onClick={likeBlogHandler}>
-              <FavoriteIcon />
+              {!likeData ? (
+                <FavoriteBorderRoundedIcon />
+              ) : (
+                <FavoriteRoundedIcon />
+              )}
               {likeLoading ? (
                 <TailSpin
                   width="20"
@@ -160,6 +177,35 @@ function BlogPage() {
               )}
             </Button>
           </Box>
+          {isBookmark ? (
+            <Box
+              component="div"
+              display="flex"
+              alignItems="center"
+              onClick={() => dispatch(removeItem(data.post))}
+            >
+              <Button
+                onClick={() => setIsBookmark((isBookmark) => !isBookmark)}
+              >
+                <BookmarkAddRoundedIcon color="primary" />
+                <Typography mr="4px">بوکمارک</Typography>
+              </Button>
+            </Box>
+          ) : (
+            <Box
+              component="div"
+              display="flex"
+              alignItems="center"
+              onClick={() => dispatch(addItem(data.post))}
+            >
+              <Button
+                onClick={() => setIsBookmark((isBookmark) => !isBookmark)}
+              >
+                <BookmarkAddOutlinedIcon color="primary" />
+                <Typography mr="4px">بوکمارک</Typography>
+              </Button>
+            </Box>
+          )}
         </Grid>
         <Grid item xs={12}>
           <CommentForm slug={slug} />

@@ -9,6 +9,7 @@ import BlogsPage from "./pages/BlogsPage";
 import AuthorPage from "./pages/AuthorPage";
 import BlogPage from "./pages/BlogPage";
 import AuthorsPage from "./pages/AuthorsPage";
+import Bookmark from "./pages/Bookmark";
 import PageNotFound from "./pages/404";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="blogs/:slug" element={<BlogPage />} />
           <Route path="authors" element={<AuthorsPage />} />
           <Route path="authors/:slug" element={<AuthorPage />} />
+          <Route path="bookmarks" element={<Bookmark />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Layout>

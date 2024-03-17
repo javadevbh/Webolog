@@ -28,4 +28,20 @@ const formatDate = (date) => {
   return isoDateString;
 };
 
-export { shortenDescription, convertDate, formatDate };
+const getStorageValue = (key, defaultValue) => {
+  const saved = localStorage.getItem(key);
+  const initial = JSON.parse(saved);
+  return initial || defaultValue;
+};
+
+const setStorageValue = (value) => {
+  localStorage.setItem("BOOKMARKS", JSON.stringify(value));
+};
+
+export {
+  shortenDescription,
+  convertDate,
+  formatDate,
+  getStorageValue,
+  setStorageValue,
+};

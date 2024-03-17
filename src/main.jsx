@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./app/store.js";
 import App from "./App.jsx";
 import "./styles/fonts.css";
 import "./styles/index.css";
@@ -17,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </BrowserRouter>
     </ThemeProvider>
   </ApolloProvider>
