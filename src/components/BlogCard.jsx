@@ -12,7 +12,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 function BlogCard({
@@ -58,7 +58,7 @@ function BlogCard({
         </Typography>
         <Box component="div" display="flex" alignItems="center" gap={1}>
           <Box component="div" display="flex" alignItems="center" gap="2px">
-            <ModeCommentOutlinedIcon color="disabled" fontSize="12px" />
+            <ModeCommentIcon color="disabled" fontSize="12px" />
             <Typography
               component="p"
               variant="span"

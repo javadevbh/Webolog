@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { SEND_COMMENT } from "../graphql/mutations";
+import RTLWrapper from "./rtl/RTLWrapper";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import rtlPlugin from "stylis-plugin-rtl";
-import { prefixer } from "stylis";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-import { Button, Grid, TextField, Typography } from "@mui/material";
 import { Comment } from "react-loader-spinner";
 
 //Helpers
 import notify from "../helpers/toastify";
 import validate from "../helpers/validate";
 import { formatDate } from "../helpers/helper";
-
-const cacheRtl = createCache({
-  key: "muirtl",
-  stylisPlugins: [prefixer, rtlPlugin],
-});
 
 function CommentForm({ slug }) {
   const [form, setForm] = useState({
@@ -27,12 +19,12 @@ function CommentForm({ slug }) {
     text: "",
   });
   const { name, email, text } = form;
+  const [errors, setErrors] = useState({});
   const datePublished = formatDate(new Date());
 
   const [sendComment, { loading, data, error }] = useMutation(SEND_COMMENT, {
     variables: { name, email, text, slug, datePublished },
   });
-  const [errors, setErrors] = useState({});
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -80,7 +72,7 @@ function CommentForm({ slug }) {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <CacheProvider value={cacheRtl}>
+        <RTLWrapper>
           <TextField
             label="نام کاربری"
             value={form.name}
@@ -88,7 +80,7 @@ function CommentForm({ slug }) {
             onChange={changeHandler}
             sx={{ width: "100%" }}
           />
-        </CacheProvider>
+        </RTLWrapper>
         {errors.name && (
           <Typography
             color="error.light"
@@ -102,7 +94,7 @@ function CommentForm({ slug }) {
         )}
       </Grid>
       <Grid item xs={12}>
-        <CacheProvider value={cacheRtl}>
+        <RTLWrapper>
           <TextField
             label="ایمیل"
             value={form.email}
@@ -110,7 +102,7 @@ function CommentForm({ slug }) {
             onChange={changeHandler}
             sx={{ width: "100%" }}
           />
-        </CacheProvider>
+        </RTLWrapper>
         {errors.email && (
           <Typography
             color="error.light"
@@ -124,7 +116,7 @@ function CommentForm({ slug }) {
         )}
       </Grid>
       <Grid item xs={12}>
-        <CacheProvider value={cacheRtl}>
+        <RTLWrapper>
           <TextField
             label="متن"
             value={form.text}
@@ -134,7 +126,7 @@ function CommentForm({ slug }) {
             onChange={changeHandler}
             sx={{ width: "100%" }}
           />
-        </CacheProvider>
+        </RTLWrapper>
         {errors.text && (
           <Typography
             color="error.light"

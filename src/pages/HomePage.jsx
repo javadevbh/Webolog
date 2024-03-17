@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { Container, Typography, Grid } from "@mui/material";
+import { Container, Typography, Grid, Box } from "@mui/material";
 
 //Components
 import Blogs from "../components/Blogs";
@@ -12,8 +12,9 @@ function HomePage() {
     <Container>
       <Grid container spacing={3} mt={4} padding={3}>
         <Grid item xs={12} md={3}>
-          <div
-            style={{
+          <Box
+            component="div"
+            sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -33,7 +34,7 @@ function HomePage() {
                 مشاهده همه
               </Typography>
             </Link>
-          </div>
+          </Box>
           <Authors />
         </Grid>
         <Grid item xs={12} md={9}>
