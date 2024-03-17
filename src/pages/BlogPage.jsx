@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GET_BLOG_INFO } from "../graphql/queries";
 import { LIKE_BLOG } from "../graphql/mutations";
 import sanitizeHtml from "sanitize-html";
@@ -27,6 +27,9 @@ import { TailSpin } from "react-loader-spinner";
 //Redux actions
 import { addItem, removeItem } from "../features//bookmarks/bookmarksSlice";
 
+//Helpers
+import { isBookmarked } from "../helpers/helper";
+
 //Components
 import CommentForm from "../components/CommentForm";
 import Comments from "../components/Comments";
@@ -39,10 +42,13 @@ function BlogPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isBookmark, setIsBookmark] = useState(false);
+  const state = useSelector((store) => store.bookmarks);
   const { loading, data, error } = useQuery(GET_BLOG_INFO, {
     variables: { slug },
   });
+  let bookmarkBlog;
+
+  if (data) bookmarkBlog = isBookmarked(state, data.post.id);
 
   const [likeBlog, { loading: likeLoading, data: likeData, error: likeError }] =
     useMutation(LIKE_BLOG, {
@@ -177,16 +183,14 @@ function BlogPage() {
               )}
             </Button>
           </Box>
-          {isBookmark ? (
+          {bookmarkBlog ? (
             <Box
               component="div"
               display="flex"
               alignItems="center"
               onClick={() => dispatch(removeItem(data.post))}
             >
-              <Button
-                onClick={() => setIsBookmark((isBookmark) => !isBookmark)}
-              >
+              <Button>
                 <BookmarkAddRoundedIcon color="primary" />
                 <Typography mr="4px">بوکمارک</Typography>
               </Button>
@@ -198,9 +202,7 @@ function BlogPage() {
               alignItems="center"
               onClick={() => dispatch(addItem(data.post))}
             >
-              <Button
-                onClick={() => setIsBookmark((isBookmark) => !isBookmark)}
-              >
+              <Button>
                 <BookmarkAddOutlinedIcon color="primary" />
                 <Typography mr="4px">بوکمارک</Typography>
               </Button>

@@ -38,10 +38,20 @@ const setStorageValue = (value) => {
   localStorage.setItem("BOOKMARKS", JSON.stringify(value));
 };
 
+const isBookmarked = (state, id) => {
+  const index = state.selectedItems.findIndex((item) => item.id == id);
+  if (index == -1) {
+    return 0;
+  } else {
+    return 1;
+  }
+};
+
 export {
   shortenDescription,
   convertDate,
   formatDate,
   getStorageValue,
   setStorageValue,
+  isBookmarked,
 };
