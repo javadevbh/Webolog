@@ -17,13 +17,13 @@
 * Displaying articles and comments' publication date in the Persian calendar.
 * Full responsiveness across mobile, tablet, laptop, and desktop devices
 ---
-## web development technologies
-# Front-End
+# web development technologies
+## Front-End
 * Reactjs
 * Redux(Redux toolkit)
 * Material UI
 * GraphQL
-# Back-End
+## Back-End
 * GraphCMS
 ---
 ## contact me
