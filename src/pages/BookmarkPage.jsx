@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { Container, Typography, Grid, Button } from "@mui/material";
 import BookmarksRoundedIcon from "@mui/icons-material/BookmarksRounded";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
@@ -8,6 +9,7 @@ import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import BookmarkCard from "../components/BookmarkCard";
 
 function BookmarkPage() {
+  useScrollToTop();
   const state = useSelector((store) => store.bookmarks);
   const navigate = useNavigate();
 
